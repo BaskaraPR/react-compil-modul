@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import $ from "jquery";
+import { Modal, Button, Form } from "react-bootstrap";
 
 class Pegawai extends Component {
   constructor() {
@@ -13,6 +14,7 @@ class Pegawai extends Component {
       alamat: "",
       action: "",
       search: "",
+      isModalOpen: false,
     };
   }
 
@@ -20,11 +22,19 @@ class Pegawai extends Component {
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  handleClose = () => {
+    this.setState({
+      isModalOpen: false,
+    });
+    $("#modal").modal("hide");
+  };
+
   Add = () => {
     // mengosongkan isi variabel nip, nama, dan alamat
     // set action menjadi "insert"
     this.setState({
-      nip: "",
+      isModalOpen: true,
+      nip: Math.floor(Math.random() * 200) + 1,
       nama: "",
       alamat: "",
       action: "insert",
@@ -38,6 +48,7 @@ class Pegawai extends Component {
     - set action menjadi "update"
     */
     this.setState({
+      isModalOpen: true,
       nip: item.nip,
       nama: item.nama,
       alamat: item.alamat,
@@ -82,8 +93,6 @@ class Pegawai extends Component {
 
   SavePegawai = (event) => {
     event.preventDefault();
-    /* menampung data nip, nama dan alamat dari Form
-    ke dalam FormData() untuk dikirim  */
     let url = "";
     if (this.state.action === "insert") {
       url = "http://localhost:2910/pegawai/save";
@@ -96,19 +105,16 @@ class Pegawai extends Component {
       nama: this.state.nama,
       alamat: this.state.alamat,
     };
-
-    // mengirim data ke API untuk disimpan pada database
     axios
       .post(url, form)
       .then((response) => {
-        // jika proses simpan berhasil, memanggil data yang terbaru
         this.getPegawai();
+        this.handleClose();
       })
       .catch((error) => {
         console.log(error);
       });
-    // menutup form modal
-    $("#modal").modal("hide");
+      
   };
 
   Drop = (nip) => {
@@ -193,49 +199,57 @@ class Pegawai extends Component {
             Tambah Data
           </button>
           {/* modal form pegawai */}
-          <div className="modal fade" id="modal">
-            <div className="modal-dialog">
-              <div className="modal-content">
-                <div className="modal-header">Form Pegawai</div>
-                <form onSubmit={this.SavePegawai}>
-                  <div className="modal-body">
-                    NIP
-                    <input
-                      type="number"
-                      name="nip"
-                      value={this.state.nip}
-                      onChange={this.bind}
-                      className="form-control"
-                      required
-                    />
-                    Nama
-                    <input
-                      type="text"
-                      name="nama"
-                      value={this.state.nama}
-                      onChange={this.bind}
-                      className="form-control"
-                      required
-                    />
-                    Alamat
-                    <input
-                      type="text"
-                      name="alamat"
-                      value={this.state.alamat}
-                      onChange={this.bind}
-                      className="form-control"
-                      required
-                    />
-                  </div>
-                  <div className="modal-footer">
-                    <button className="btn btn-sm btn-success" type="submit">
-                      Simpan
-                    </button>
-                  </div>
-                </form>
-              </div>
-            </div>
-          </div>
+          <Modal show={this.state.isModalOpen}>
+            <Modal.Header>
+              <Modal.Title>Form Pegawai</Modal.Title>
+            </Modal.Header>
+            {/* <Form onSubmit={e=>this.handleSave(e)}> */}
+            <Form onSubmit={(e) => this.SavePegawai(e)}>
+              <Modal.Body>
+                <Form.Group className="mb-3" controlId="nip">
+                  <Form.Label>NIP</Form.Label>
+                  <Form.Control
+                    type="number"
+                    name="nip"
+                    readOnly
+                    value={this.state.nip}
+                    onChange={this.bind}
+                    required
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="nama">
+                  <Form.Label>Nama</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="nama"
+                    value={this.state.nama}
+                    onChange={this.bind}
+                    className="form-control"
+                    required
+                  />
+                </Form.Group>
+                <Form.Group className="mb-3" controlId="alamat">
+                  <Form.Label>Alamat</Form.Label>
+                  <Form.Control
+                    type="text"
+                    name="alamat"
+                    value={this.state.alamat}
+                    onChange={this.bind}
+                    className="form-control"
+                    required
+                  />
+                </Form.Group>
+              </Modal.Body>
+              <Modal.Footer>
+                <Button variant="secondary" onClick={this.handleClose}>
+                  Close
+                </Button>
+                <Button variant="primary" type="submit">
+                  Save
+                </Button>
+              </Modal.Footer>
+            </Form>
+          </Modal>
         </div>
       </div>
     );
