@@ -1,0 +1,6 @@
+export { default as TentangSaya } from "./about"
+export { default as Cart } from "./cart"
+export { default as Kontak } from "./contact"
+export { default as Gallery } from "./gallery"
+export { default as Home } from "./home"
+export { default as Pegawai } from "./pegawai"

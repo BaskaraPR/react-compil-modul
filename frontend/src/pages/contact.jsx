@@ -1,11 +1,12 @@
 import React from "react";
+import Layout from "../components/Layout";
 
 class Kontak extends React.Component {
   render() {
     return (
-      <div>
+      <Layout>
         <h2>john cenas contact</h2>
-      </div>
+      </Layout>
     );
   }
 }
