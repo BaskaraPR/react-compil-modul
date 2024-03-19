@@ -31,11 +31,6 @@ const Navbar = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/karya">
-                Karya
-              </Link>
-            </li>
-            <li className="nav-item">
               <Link className="nav-link" to="/kontak">
                 Kontak
               </Link>
@@ -52,7 +47,7 @@ const Navbar = () => {
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/pegawai">
-                Free Labor
+                List
               </Link>
             </li>
           </ul>
