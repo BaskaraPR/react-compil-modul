@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import $ from "jquery";
 import { Modal, Button, Form } from "react-bootstrap";
+import Layout from "../components/Layout";
 
 class Pegawai extends Component {
   constructor() {
@@ -114,7 +115,6 @@ class Pegawai extends Component {
       .catch((error) => {
         console.log(error);
       });
-      
   };
 
   Drop = (nip) => {
@@ -140,118 +140,120 @@ class Pegawai extends Component {
 
   render() {
     return (
-      <div className="m-3 card">
-        <div className="card-header bg-info text-white">Data Pegawai</div>
-        <div className="card-body">
-          <input
-            type="text"
-            className="form-control mb-2"
-            name="search"
-            value={this.state.search}
-            onChange={this.bind}
-            onKeyUp={this.findPegawai}
-            placeholder="Pencarian..."
-          />
-          {/* tampilan tabel pegawai */}
-          <table className="table">
-            <thead>
-              <tr>
-                <th>NIP</th>
-                <th>Nama</th>
-                <th>Alamat</th>
-                <th>Option</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.pegawai.map((item, index) => {
-                return (
-                  <tr key={index}>
-                    <td>{item.nip}</td>
-                    <td>{item.nama}</td>
-                    <td>{item.alamat}</td>
-                    <td>
-                      <button
-                        className="btn btn-sm btn-info m-1"
-                        data-toggle="modal"
-                        data-target="#modal"
-                        onClick={() => this.Edit(item)}
-                      >
-                        Edit
-                      </button>
-                      <button
-                        className="btn btn-sm btn-danger m-1"
-                        onClick={() => this.Drop(item.nip)}
-                      >
-                        Hapus
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-          <button
-            className="btn btn-success"
-            onClick={this.Add}
-            data-toggle="modal"
-            data-target="#modal"
-          >
-            Tambah Data
-          </button>
-          {/* modal form pegawai */}
-          <Modal show={this.state.isModalOpen}>
-            <Modal.Header>
-              <Modal.Title>Form Pegawai</Modal.Title>
-            </Modal.Header>
-            {/* <Form onSubmit={e=>this.handleSave(e)}> */}
-            <Form onSubmit={(e) => this.SavePegawai(e)}>
-              <Modal.Body>
-                <Form.Group className="mb-3" controlId="nip">
-                  <Form.Label>NIP</Form.Label>
-                  <Form.Control
-                    type="number"
-                    name="nip"
-                    readOnly
-                    value={this.state.nip}
-                    onChange={this.bind}
-                    required
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="nama">
-                  <Form.Label>Nama</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="nama"
-                    value={this.state.nama}
-                    onChange={this.bind}
-                    className="form-control"
-                    required
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="alamat">
-                  <Form.Label>Alamat</Form.Label>
-                  <Form.Control
-                    type="text"
-                    name="alamat"
-                    value={this.state.alamat}
-                    onChange={this.bind}
-                    className="form-control"
-                    required
-                  />
-                </Form.Group>
-              </Modal.Body>
-              <Modal.Footer>
-                <Button variant="secondary" onClick={this.handleClose}>
-                  Close
-                </Button>
-                <Button variant="primary" type="submit">
-                  Save
-                </Button>
-              </Modal.Footer>
-            </Form>
-          </Modal>
+      <Layout>
+        <div className="m-3 card">
+          <div className="card-header bg-info text-white">Data Pegawai</div>
+          <div className="card-body">
+            <input
+              type="text"
+              className="form-control mb-2"
+              name="search"
+              value={this.state.search}
+              onChange={this.bind}
+              onKeyUp={this.findPegawai}
+              placeholder="Pencarian..."
+            />
+            {/* tampilan tabel pegawai */}
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>NIP</th>
+                  <th>Nama</th>
+                  <th>Alamat</th>
+                  <th>Option</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.pegawai.map((item, index) => {
+                  return (
+                    <tr key={index}>
+                      <td>{item.nip}</td>
+                      <td>{item.nama}</td>
+                      <td>{item.alamat}</td>
+                      <td>
+                        <button
+                          className="btn btn-sm btn-info m-1"
+                          data-toggle="modal"
+                          data-target="#modal"
+                          onClick={() => this.Edit(item)}
+                        >
+                          Edit
+                        </button>
+                        <button
+                          className="btn btn-sm btn-danger m-1"
+                          onClick={() => this.Drop(item.nip)}
+                        >
+                          Hapus
+                        </button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+            <button
+              className="btn btn-success"
+              onClick={this.Add}
+              data-toggle="modal"
+              data-target="#modal"
+            >
+              Tambah Data
+            </button>
+            {/* modal form pegawai */}
+            <Modal show={this.state.isModalOpen}>
+              <Modal.Header>
+                <Modal.Title>Form Pegawai</Modal.Title>
+              </Modal.Header>
+              {/* <Form onSubmit={e=>this.handleSave(e)}> */}
+              <Form onSubmit={(e) => this.SavePegawai(e)}>
+                <Modal.Body>
+                  <Form.Group className="mb-3" controlId="nip">
+                    <Form.Label>NIP</Form.Label>
+                    <Form.Control
+                      type="number"
+                      name="nip"
+                      readOnly
+                      value={this.state.nip}
+                      onChange={this.bind}
+                      required
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="nama">
+                    <Form.Label>Nama</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="nama"
+                      value={this.state.nama}
+                      onChange={this.bind}
+                      className="form-control"
+                      required
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="alamat">
+                    <Form.Label>Alamat</Form.Label>
+                    <Form.Control
+                      type="text"
+                      name="alamat"
+                      value={this.state.alamat}
+                      onChange={this.bind}
+                      className="form-control"
+                      required
+                    />
+                  </Form.Group>
+                </Modal.Body>
+                <Modal.Footer>
+                  <Button variant="secondary" onClick={this.handleClose}>
+                    Close
+                  </Button>
+                  <Button variant="primary" type="submit">
+                    Save
+                  </Button>
+                </Modal.Footer>
+              </Form>
+            </Modal>
+          </div>
         </div>
-      </div>
+      </Layout>
     );
   }
 }

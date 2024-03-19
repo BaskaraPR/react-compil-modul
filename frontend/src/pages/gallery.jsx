@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-key */
 import { Component } from "react";
-import Card from "../pages/card";
+import Card from "../components/Card";
 import { Modal, Button, Form } from "react-bootstrap";
-import Cart from "./cart";
+import Layout from "../components/Layout";
 
 class Gallery extends Component {
   constructor() {
@@ -216,7 +216,7 @@ class Gallery extends Component {
 
   render() {
     return (
-      <div className="container">
+      <Layout>
         <div className="container">
           <h4 className="alert alert-light">Hallo, {this.state.user}</h4>
           {/* class="alert alert-primary" role="alert" */}
@@ -327,7 +327,7 @@ class Gallery extends Component {
             </Form>
           </Modal>
         </div>
-      </div>
+      </Layout>
     );
   }
 }
