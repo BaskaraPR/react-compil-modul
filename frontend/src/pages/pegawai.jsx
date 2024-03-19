@@ -34,7 +34,7 @@ class Pegawai extends Component {
     // set action menjadi "insert"
     this.setState({
       isModalOpen: true,
-      nip: Math.floor(Math.random() * 200) + 1,
+      nip: Math.floor(Math.random() * 101) + 100,
       nama: "",
       alamat: "",
       action: "insert",
