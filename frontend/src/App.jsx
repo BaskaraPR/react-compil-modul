@@ -1,14 +1,10 @@
 import React from "react";
-import Utama from "./pages/main";
-import Navbar from "./components/Navbar";
+import Router from "./Routes/Router";
 
 class App extends React.Component {
   render() {
     return (
-      <div>
-        <Navbar />
-        <Utama />
-      </div>
+      <Router />
     );
   }
 }

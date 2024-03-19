@@ -1,5 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { Component } from "react";
+import Layout from "../components/Layout";
 
 class Cart extends Component {
   constructor() {
@@ -38,7 +39,7 @@ class Cart extends Component {
   };
   render() {
     return (
-      <div className="container">
+      <Layout>
         <div className="card col-12 mt-2">
           <div className="card-header bg-primary text-white">
             <h4>Data Keranjang Belanja</h4>
@@ -72,7 +73,7 @@ class Cart extends Component {
             <h4 className="text-danger">Total Harga: Rp {this.state.total}</h4>
           </div>
         </div>
-      </div>
+      </Layout>
     );
   }
 }
