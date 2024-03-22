@@ -7,7 +7,7 @@ const db = mysql.createConnection({
   host: "localhost",
   password: "",
   user: "root",
-  database: "react_mdl5",
+  database: "reactmdl5",
 });
 
 db.connect((err) => {
